@@ -171,6 +171,9 @@ public class Main {
         System.out.print("Enter third number: ");
         float thirdNumber = input.nextFloat();
 
+        System.out.println("Using if else");
+        //If-Else without using Logical operators
+
 /*        if (firstNumber > secondNumber) {
             if (secondNumber > thirdNumber) {
                 differentNumbersSort(firstNumber, secondNumber, thirdNumber);
@@ -209,7 +212,9 @@ public class Main {
             }
         }*/
 
-/*        if ((firstNumber > secondNumber) && (secondNumber > thirdNumber)) {
+        //If-Else option using Logical Operators
+
+        if ((firstNumber > secondNumber) && (secondNumber > thirdNumber)) {
             differentNumbersSort(firstNumber, secondNumber, thirdNumber);
         } else if ((firstNumber > secondNumber) && (secondNumber < thirdNumber)) {
             if (thirdNumber > firstNumber) {
@@ -241,10 +246,27 @@ public class Main {
             } else {
                 System.out.println("All numbers are equal!");
             }
-        }*/
+        }
 
+        //Using Ternary Operators
+        System.out.println("Using Ternary Operators");
 
+        float highestNumber = ((firstNumber >= secondNumber) && (firstNumber >= thirdNumber)) ? firstNumber
+                : (secondNumber >= firstNumber) && (secondNumber >= thirdNumber) ? secondNumber
+                : (thirdNumber >= firstNumber) && (thirdNumber >= secondNumber) ? thirdNumber
+                : 0;
 
+        float lowestNumber = ((firstNumber <= secondNumber) && (firstNumber <= thirdNumber)) ? firstNumber
+                : (secondNumber <= firstNumber) && (secondNumber <= thirdNumber) ? secondNumber
+                : (thirdNumber <= firstNumber) && (thirdNumber <= secondNumber) ? thirdNumber
+                : 0;
+
+        float medianNumber = (((firstNumber >= thirdNumber) && (firstNumber <= secondNumber)) || ((firstNumber <= thirdNumber) && (firstNumber >= secondNumber))) ? firstNumber
+                : (((secondNumber >= firstNumber) && (secondNumber <= thirdNumber)) || ((secondNumber <= firstNumber) && (secondNumber >= thirdNumber))) ? secondNumber
+                : (((thirdNumber >= firstNumber) && (thirdNumber <= secondNumber)) || ((thirdNumber <= firstNumber) && (thirdNumber >= secondNumber))) ? thirdNumber
+                : 0;
+
+        differentNumbersSort(highestNumber, medianNumber, lowestNumber);
 
 
         input.close();
