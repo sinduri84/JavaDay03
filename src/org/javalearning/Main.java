@@ -20,31 +20,65 @@ public class Main {
                 "%nThe lowest equal numbers are %.2f. %n", highestNumber, lowestNumber);
     }
 
-    public static void main(String[] args) {
-        //A1 Exercise
-        /*
-        Numbers greater than zero are positive numbers and
-        below zero are negative numbers.
-        Zero is neither a positive nor a negative number.
-        */
-        System.out.println("A1 Exercise");
-
-        int a1Variable = -10;
-
-        if (a1Variable > 0) {
-            System.out.println("The number " + a1Variable + " is a positive number");
-        } else if (a1Variable == 0) {
-            System.out.println("The number " + a1Variable + " is a neutral number");
-        } else {
-            System.out.println("The number " + a1Variable + " is a negative number");
+    static void numbersMaxMinMedIf(float firstNumber, float secondNumber, float thirdNumber) {
+        if ((firstNumber > secondNumber) && (secondNumber > thirdNumber)) {
+            differentNumbersSort(firstNumber, secondNumber, thirdNumber);
+        } else if ((firstNumber > secondNumber) && (secondNumber < thirdNumber)) {
+            if (thirdNumber > firstNumber) {
+                differentNumbersSort(thirdNumber, firstNumber, secondNumber);
+            } else if (firstNumber > thirdNumber) {
+                differentNumbersSort(firstNumber, thirdNumber, secondNumber);
+            } else { //firstNumber == thirdNumber
+                twoHighNumbersSort(firstNumber, secondNumber);
+            }
+        } else if ((firstNumber > secondNumber) && (secondNumber == thirdNumber)) {
+            twoLowNumbersSort(firstNumber, secondNumber);
+        } else if ((firstNumber < secondNumber) && (firstNumber > thirdNumber)) {
+            differentNumbersSort(secondNumber, firstNumber, thirdNumber);
+        } else if ((firstNumber < secondNumber) && (firstNumber < thirdNumber)) {
+            if (secondNumber > thirdNumber) {
+                differentNumbersSort(secondNumber, thirdNumber, firstNumber);
+            } else if (secondNumber < thirdNumber) {
+                differentNumbersSort(thirdNumber, secondNumber, firstNumber);
+            } else { //secondNumber == thirdNumber
+                twoHighNumbersSort(secondNumber, firstNumber);
+            }
+        } else if ((firstNumber < secondNumber) && (firstNumber == thirdNumber)) {
+            twoLowNumbersSort(secondNumber, firstNumber);
+        } else { // firstNumber == secondNumber
+            if (firstNumber > thirdNumber) {
+                twoHighNumbersSort(firstNumber, thirdNumber);
+            } else if (firstNumber < thirdNumber) {
+                twoLowNumbersSort(thirdNumber, firstNumber);
+            } else {
+                System.out.println("All numbers are equal!");
+            }
         }
+    }
 
-        //A2
-        System.out.println("");
-        System.out.println("A2 Exercise");
+    static void numbersMaxMinMedTernary (float firstNumber, float secondNumber, float thirdNumber) {
+        float highestNumber = ((firstNumber >= secondNumber) && (firstNumber >= thirdNumber)) ? firstNumber
+                : (secondNumber >= firstNumber) && (secondNumber >= thirdNumber) ? secondNumber
+                : (thirdNumber >= firstNumber) && (thirdNumber >= secondNumber) ? thirdNumber
+                : 0;
 
-        float a2Variable= 0f;
+        float lowestNumber = ((firstNumber <= secondNumber) && (firstNumber <= thirdNumber)) ? firstNumber
+                : (secondNumber <= firstNumber) && (secondNumber <= thirdNumber) ? secondNumber
+                : (thirdNumber <= firstNumber) && (thirdNumber <= secondNumber) ? thirdNumber
+                : 0;
 
+        float medianNumber = (((firstNumber >= thirdNumber) && (firstNumber <= secondNumber)) ||
+                ((firstNumber <= thirdNumber) && (firstNumber >= secondNumber))) ? firstNumber
+                : (((secondNumber >= firstNumber) && (secondNumber <= thirdNumber)) ||
+                ((secondNumber <= firstNumber) && (secondNumber >= thirdNumber))) ? secondNumber
+                : (((thirdNumber >= firstNumber) && (thirdNumber <= secondNumber)) ||
+                ((thirdNumber <= firstNumber) && (thirdNumber >= secondNumber))) ? thirdNumber
+                : 0;
+
+        differentNumbersSort(highestNumber, medianNumber, lowestNumber);
+    }
+
+    static void signA2Number(float a2Variable) {
         if(a2Variable == 0) {
             System.out.println("The number is equal to zero");
         } else if(a2Variable < 0) {
@@ -58,15 +92,43 @@ public class Main {
                 System.out.println("The number " + a2Variable + " is a positive number.");
             }
         }
+    }
+
+    public static void main(String[] args) {
+        //A1 Exercise
+        /*
+        Numbers greater than zero are positive numbers and
+        below zero are negative numbers.
+        Zero is neither a positive nor a negative number.
+        */
+        System.out.println("\nA1 Exercise");
+
+        int a1Variable = -10;
+
+        if (a1Variable > 0) {
+            System.out.println("The number " + a1Variable + " is a positive number");
+        } else if (a1Variable == 0) {
+            System.out.println("The number " + a1Variable + " is a neutral number");
+        } else {
+            System.out.println("The number " + a1Variable + " is a negative number");
+        }
+
+        //A2
+        System.out.println("\nA2 Exercise");
+
+        signA2Number(2000000);
+        signA2Number(0);
+        signA2Number(0.01f);
+        signA2Number(-16.5f);
+
 
         //A3
-        System.out.println("");
-        System.out.println("A3 Exercise");
+        System.out.println("\nA3 Exercise");
 
         int a3Variable = 3;
 
         //Using if Statement
-        System.out.println("A3.a");
+        System.out.println("\nA3.a - Using if else");
 
         if (a3Variable == 1) {
             System.out.println("Today is Monday");
@@ -87,7 +149,7 @@ public class Main {
         }
 
         //Using Switch Statement
-        System.out.println("A3.c");
+        System.out.println("\nA3.c - Using Switch");
 
         switch (a3Variable) {
             case 1:
@@ -116,8 +178,7 @@ public class Main {
         }
 
         //A4
-        System.out.println("");
-        System.out.println("A4 Exercise");
+        System.out.println("\nA4 Exercise");
 
         int a4FirstVariable = 5;
         int a4SecondVariable = 6;
@@ -131,8 +192,7 @@ public class Main {
         }
 
         //A5
-        System.out.println("");
-        System.out.println("A5 Exercise");
+        System.out.println("\nA5 Exercise");
 
         int a5Variable = 9;
 
@@ -141,8 +201,7 @@ public class Main {
         System.out.println(a5Result);
 
         //A6
-        System.out.println("");
-        System.out.println("A6 Exercise");
+        System.out.println("\nA6 Exercise");
 
         int a6Variable = 16;
 
@@ -157,8 +216,7 @@ public class Main {
         }
 
         //Advanced A6
-        System.out.println("");
-        System.out.println("Advanced A6 Exercise");
+        System.out.println("\nAdvanced A6 Exercise\n");
 
         Scanner input = new Scanner(System.in);
 
@@ -171,7 +229,6 @@ public class Main {
         System.out.print("Enter third number: ");
         float thirdNumber = input.nextFloat();
 
-        System.out.println("Using if else");
         //If-Else without using Logical operators
 
 /*        if (firstNumber > secondNumber) {
@@ -213,60 +270,13 @@ public class Main {
         }*/
 
         //If-Else option using Logical Operators
-
-        if ((firstNumber > secondNumber) && (secondNumber > thirdNumber)) {
-            differentNumbersSort(firstNumber, secondNumber, thirdNumber);
-        } else if ((firstNumber > secondNumber) && (secondNumber < thirdNumber)) {
-            if (thirdNumber > firstNumber) {
-                differentNumbersSort(thirdNumber, firstNumber, secondNumber);
-            } else if (firstNumber > thirdNumber) {
-                differentNumbersSort(firstNumber, thirdNumber, secondNumber);
-            } else { //firstNumber == thirdNumber
-                twoHighNumbersSort(firstNumber, secondNumber);
-            }
-        } else if ((firstNumber > secondNumber) && (secondNumber == thirdNumber)) {
-            twoLowNumbersSort(firstNumber, secondNumber);
-        } else if ((firstNumber < secondNumber) && (firstNumber > thirdNumber)) {
-            differentNumbersSort(secondNumber, firstNumber, thirdNumber);
-        } else if ((firstNumber < secondNumber) && (firstNumber < thirdNumber)) {
-            if (secondNumber > thirdNumber) {
-                differentNumbersSort(secondNumber, thirdNumber, firstNumber);
-            } else if (secondNumber < thirdNumber) {
-                differentNumbersSort(thirdNumber, secondNumber, firstNumber);
-            } else { //secondNumber == thirdNumber
-                twoHighNumbersSort(secondNumber, firstNumber);
-            }
-        } else if ((firstNumber < secondNumber) && (firstNumber == thirdNumber)) {
-            twoLowNumbersSort(secondNumber, firstNumber);
-        } else { // firstNumber == secondNumber
-            if (firstNumber > thirdNumber) {
-                twoHighNumbersSort(firstNumber, thirdNumber);
-            } else if (firstNumber < thirdNumber) {
-                twoLowNumbersSort(thirdNumber, firstNumber);
-            } else {
-                System.out.println("All numbers are equal!");
-            }
-        }
+        System.out.println("\nUsing if else");
+        numbersMaxMinMedIf(firstNumber, secondNumber, thirdNumber);
 
         //Using Ternary Operators
-        System.out.println("Using Ternary Operators");
+        System.out.println("\nUsing Ternary Operators");
 
-        float highestNumber = ((firstNumber >= secondNumber) && (firstNumber >= thirdNumber)) ? firstNumber
-                : (secondNumber >= firstNumber) && (secondNumber >= thirdNumber) ? secondNumber
-                : (thirdNumber >= firstNumber) && (thirdNumber >= secondNumber) ? thirdNumber
-                : 0;
-
-        float lowestNumber = ((firstNumber <= secondNumber) && (firstNumber <= thirdNumber)) ? firstNumber
-                : (secondNumber <= firstNumber) && (secondNumber <= thirdNumber) ? secondNumber
-                : (thirdNumber <= firstNumber) && (thirdNumber <= secondNumber) ? thirdNumber
-                : 0;
-
-        float medianNumber = (((firstNumber >= thirdNumber) && (firstNumber <= secondNumber)) || ((firstNumber <= thirdNumber) && (firstNumber >= secondNumber))) ? firstNumber
-                : (((secondNumber >= firstNumber) && (secondNumber <= thirdNumber)) || ((secondNumber <= firstNumber) && (secondNumber >= thirdNumber))) ? secondNumber
-                : (((thirdNumber >= firstNumber) && (thirdNumber <= secondNumber)) || ((thirdNumber <= firstNumber) && (thirdNumber >= secondNumber))) ? thirdNumber
-                : 0;
-
-        differentNumbersSort(highestNumber, medianNumber, lowestNumber);
+        numbersMaxMinMedTernary(firstNumber, secondNumber, thirdNumber);
 
 
         input.close();
